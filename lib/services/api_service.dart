@@ -6,4 +6,8 @@ class ApiService{
     'http://10.0.2.2:8080/api/app'; // 'localhost' for android emulator;
   var _client = new http.Client();
 
+
+  Future<bool> loginUser() async{
+    return true;
+  }
 }

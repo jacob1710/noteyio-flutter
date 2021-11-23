@@ -30,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       TextFormField(
                         decoration: const InputDecoration(
-                            icon: Icon(Icons.contact_mail),
+                            icon: Icon(Icons.perm_identity),
                           hintText: 'Enter Email',
                           labelText: 'Email Address:',
                         ),
@@ -44,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          icon: Icon(Icons.password),
+                          icon: Icon(Icons.lock),
                           hintText: 'Enter Password',
                           labelText: 'Password:',
                         ),
