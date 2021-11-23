@@ -6,6 +6,7 @@ import 'package:noteyio_flutter/views/authentication/login/login_view.dart';
 import 'package:noteyio_flutter/views/basemodel.dart';
 import 'package:provider/provider.dart';
 
+import 'constants/app_styles.dart';
 import 'locator.dart';
 
 Future<void> main() async {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NoteyIO',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: AppStyles.createMaterialColor(AppStyles.kPrimaryColor),
       ),
       home: ChangeNotifierProvider(
         create: (context) => BaseModel(),

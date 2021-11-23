@@ -20,19 +20,55 @@ class _LoginViewState extends State<LoginView> {
         builder: (context, model, child) => Scaffold(
           backgroundColor: AppStyles.kDefaultDarkColor,
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              TextFormField(
-
-              ),
-              TextFormField(
-
-              ),
-              Center(
-                child: DefaultButton(
-                  onTapped: (){},
-                  text: 'Login',
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            icon: Icon(Icons.contact_mail),
+                          hintText: 'Enter Email',
+                          labelText: 'Email Address:',
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        enableSuggestions: true,
+                        autocorrect: false,
+                        onChanged: (value){
+                          print(value);
+                          model.currentEmail = value;
+                        },
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.password),
+                          hintText: 'Enter Password',
+                          labelText: 'Password:',
+                        ),
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        onChanged: (value){
+                          print(value);
+                          model.currentPwd = value;
+                        },
+                      ),
+                      Center(
+                        child: DefaultButton(
+                          onTapped: (){
+                            model.loginPressed();
+                          },
+                          text: 'Login',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
+
             ],
           ),
         )
