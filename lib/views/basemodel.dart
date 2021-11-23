@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio_flutter/constants/route_names.dart';
-import 'package:noteyio_flutter/services/navigationservice.dart';
+import 'package:noteyio_flutter/services/navigation_service.dart';
 
 import '../locator.dart';
 

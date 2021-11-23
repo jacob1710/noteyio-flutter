@@ -9,7 +9,7 @@ class LoginViewModel extends BaseModel{
     print('LoginViewModel.init');
   }
   bool loginPressed(){
-    print(currentPwd+'@'+currentEmail);
+    print(currentEmail+'@'+currentPwd);
     return true;
   }
 }

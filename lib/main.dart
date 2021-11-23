@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio_flutter/router.dart';
-import 'package:noteyio_flutter/services/navigationservice.dart';
+import 'package:noteyio_flutter/services/navigation_service.dart';
 import 'package:noteyio_flutter/views/authentication/intro_view.dart';
 import 'package:noteyio_flutter/views/authentication/login/login_view.dart';
 import 'package:noteyio_flutter/views/basemodel.dart';
