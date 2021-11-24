@@ -1,3 +1,4 @@
+import 'package:noteyio_flutter/models/User.dart';
 import 'package:noteyio_flutter/views/basemodel.dart';
 
 class LoginViewModel extends BaseModel{
@@ -8,8 +9,9 @@ class LoginViewModel extends BaseModel{
   Future<void> init() async{
     print('LoginViewModel.init');
   }
-  bool loginPressed(){
+  Future<User?> loginPressed() async {
     print(currentEmail+'@'+currentPwd);
-    return true;
+    User? optionalUser = await apiService.loginUser();
+    return optionalUser;
   }
 }

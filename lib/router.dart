@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:noteyio_flutter/constants/route_names.dart';
 import 'package:noteyio_flutter/views/authentication/login/login_view.dart';
 import 'package:noteyio_flutter/views/authentication/registration/registration_view.dart';
+import 'package:noteyio_flutter/views/home/home_view.dart';
+import 'package:noteyio_flutter/views/home/home_view_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("Router Accessed.");
@@ -16,6 +18,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: RegistrationView(),
+      );
+
+    case AppRouteNames.kHomeViewRoute:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: HomeView(),
       );
 
     default:

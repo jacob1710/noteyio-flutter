@@ -8,10 +8,14 @@ class ApiService{
   var _client = new http.Client();
 
 
+  //----User Methods----
   Future<User?> loginUser() async{
     const String userId = '618bf5e632156c69279d30c';
     const String email = 'jacob@scase.co.uk';
     const String userName = 'jacob';
+
+    //Validate User
+
     User user = new User(id: userId, email: email, userName: userName);
     return user;
   }
@@ -26,4 +30,6 @@ class ApiService{
     User user = new User(id: userId, email: email, userName: userName);
     return user;
   }
+
+//----Note Methods----
 }
