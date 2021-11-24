@@ -18,60 +18,62 @@ class _LoginViewState extends State<LoginView> {
         viewModelBuilder: () => LoginViewModel(),
         onModelReady: (model) => model.init(),
         builder: (context, model, child) => Scaffold(
-          backgroundColor: AppStyles.kDefaultDarkColor,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            icon: Icon(Icons.perm_identity),
-                          hintText: 'Enter Email',
-                          labelText: 'Email Address:',
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                        enableSuggestions: true,
-                        autocorrect: false,
-                        onChanged: (value){
-                          print(value);
-                          model.currentEmail = value;
-                        },
+              backgroundColor: AppStyles.kDefaultDarkColor,
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Login:",
+                            style: AppStyles.kHeadingTextStyle,
+                          ),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              icon: Icon(Icons.perm_identity),
+                              hintText: 'Enter Email',
+                              labelText: 'Email Address:',
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            enableSuggestions: true,
+                            autocorrect: false,
+                            onChanged: (value) {
+                              print(value);
+                              model.currentEmail = value;
+                            },
+                          ),
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              icon: Icon(Icons.lock),
+                              hintText: 'Enter Password',
+                              labelText: 'Password:',
+                            ),
+                            obscureText: true,
+                            enableSuggestions: false,
+                            autocorrect: false,
+                            onChanged: (value) {
+                              print(value);
+                              model.currentPwd = value;
+                            },
+                          ),
+                          Center(
+                            child: DefaultButton(
+                              onTapped: () {
+                                model.loginPressed();
+                              },
+                              text: 'Login',
+                            ),
+                          ),
+                        ],
                       ),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                          icon: Icon(Icons.lock),
-                          hintText: 'Enter Password',
-                          labelText: 'Password:',
-                        ),
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        onChanged: (value){
-                          print(value);
-                          model.currentPwd = value;
-                        },
-                      ),
-                      Center(
-                        child: DefaultButton(
-                          onTapped: (){
-                            model.loginPressed();
-                          },
-                          text: 'Login',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-
-            ],
-          ),
-        )
-    );
+                    ),
+                  )
+                ],
+              ),
+            ));
   }
 }

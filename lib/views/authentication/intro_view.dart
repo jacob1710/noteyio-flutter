@@ -44,7 +44,8 @@ class IntroView extends StatelessWidget {
                   model.getStarted();
                   // model.navigateToLogin();
                   print('Register');
-                    },
+                  model.navigateToRegistration();
+                  },
                 text: "Create a new Account",
               ),
             ],

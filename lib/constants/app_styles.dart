@@ -13,6 +13,11 @@ class AppStyles{
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
+  static const TextStyle kHeadingTextStyle = TextStyle(
+    color: kDefaultDarkColor,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
 
   static const Color kDefaultDarkColor = Color(0xFF27272B);
   static const Color kPrimaryColor = Color(0xFFFF59F8);
