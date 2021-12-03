@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/route_names.dart';
+import 'package:noteyio/views/authentication/intro_view.dart';
 import 'package:noteyio/views/authentication/login/login_view.dart';
 import 'package:noteyio/views/authentication/registration/registration_view.dart';
 import 'package:noteyio/views/home/home_view.dart';
@@ -24,6 +25,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: HomeView(),
+      );
+    case AppRouteNames.kIntroViewRoute:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: IntroView(),
       );
 
     default:

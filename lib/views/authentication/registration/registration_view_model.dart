@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:noteyio/models/User.dart';
 import 'package:noteyio/views/basemodel.dart';
 
@@ -22,8 +23,17 @@ class RegistrationViewModel extends BaseModel{
     NoteyioUser? optionalUser;
     if(status == "successful"){
       print("successful");
-      print(authService.getUser());
-      optionalUser = await apiService.registerUser();
+      User? firebaseUser = await authService.getUser();
+      print("successful");
+      if(firebaseUser != null){
+        Map<String, String> newUserDto = {
+          "userName": currentUserName,
+          "email": currentEmail,
+          "firebaseId": firebaseUser.uid
+        };
+        optionalUser = await apiService.registerUser(newUserDto);
+      }
+
     }else{
       //Error
       print(status);

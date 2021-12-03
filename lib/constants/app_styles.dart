@@ -21,6 +21,8 @@ class AppStyles{
 
   static const Color kDefaultDarkColor = Color(0xFF27272B);
   static const Color kPrimaryColor = Color(0xFFFF59F8);
+  static const Color kSecondaryColor = Colors.blue;
+
 
   //https://medium.com/@filipvk/creating-a-custom-color-swatch-in-flutter-554bcdcb27f3
   static MaterialColor createMaterialColor(Color color) {

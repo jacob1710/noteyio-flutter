@@ -15,6 +15,15 @@ class BaseModel extends ChangeNotifier {
   final UserService userService = locator<UserService>();
   final AuthService authService = locator<AuthService>();
 
+  Future<bool> isUserLoggedIn() async {
+    return authService.isUserLoggedIn();
+  }
+
+  void logoutUser() {
+    authService.logout();
+    navigateToIntro();
+  }
+
 
   //----Navigation Methods ----
   navigateToLogin(){
@@ -25,5 +34,8 @@ class BaseModel extends ChangeNotifier {
   }
   navigateToHome(){
     _navigationService.navigateToWithNoBack(AppRouteNames.kHomeViewRoute);
+  }
+  navigateToIntro(){
+    _navigationService.navigateToWithNoBack(AppRouteNames.kIntroViewRoute);
   }
 }

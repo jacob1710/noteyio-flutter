@@ -49,22 +49,11 @@ class ApiService{
   }
 
   //----User Methods----
-  Future<NoteyioUser?> loginUser() async{
-    const String userId = '618bf5e632156c69279d30c';
-    const String email = 'jacob@scase.co.uk';
-    const String userName = 'jacob';
-
-    //Validate User
-
-    NoteyioUser user = new NoteyioUser(id: userId, email: email, userName: userName);
-    return user;
-  }
 
   Future<NoteyioUser?> getUser(String firebaseId) async{
     print('ApiService.getUser');
-    const String firebaseId = 'qsdgjnhsldjkgh234626';
     try {
-      var endpoint = Uri.parse('$_endpoint/getUser?firebaseId=$firebaseId');
+      var endpoint = Uri.parse('$_endpoint/users/get?firebaseId=$firebaseId');
       var response =
       await _client.get(endpoint, headers: _headers).timeout(_smallTimeout);
       if (response.statusCode == 200) {
@@ -89,14 +78,32 @@ class ApiService{
     }
   }
 
-  Future<NoteyioUser?> registerUser() async{
-    const String userId = '618bf5e632156c69279d30c';
-    const String email = 'jacob@scase.co.uk';
-    const String userName = 'jacob';
-    //REGISTER USER WITH API
-
-    NoteyioUser user = new NoteyioUser(id: userId, email: email, userName: userName);
-    return user;
+  Future<NoteyioUser?> registerUser(Map<String, String> newUserDto) async{
+    print('ApiService.registerUser');
+    const String firebaseId = 'qsdgjnhsldjkgh234626';
+    try {
+      var endpoint = Uri.parse('$_endpoint/users/create');
+      var response =
+      await _client.post(endpoint, headers: _headers,body:JsonEncoder().convert(newUserDto)).timeout(_smallTimeout);
+      if (response.statusCode == 200) {
+        try {
+          print(response.body);
+          var body = json.decode(response.body);
+          print(body);
+          var user = NoteyioUser.fromJson(body);
+          print("Found User: " + user.toString());
+          return user;
+        } catch (e) {
+          print(e.toString());
+        }
+      } else {
+        print('No User Found');
+        print(response.body);
+      }
+    } catch (e) {
+      print("error");
+    }
+    return null;
   }
 
   Future<bool?> userExitsWithEmail() async{

@@ -12,7 +12,7 @@ class IntroView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<IntroViewModel>.reactive(
         viewModelBuilder: () => IntroViewModel(),
-        onModelReady: (model) => model.init(),
+        onModelReady: (model) => model.init(context: context),
         builder: (context, model, child) => Scaffold(
           backgroundColor: AppStyles.kDefaultDarkColor,
           body: Column(
