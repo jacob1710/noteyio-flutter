@@ -1,4 +1,4 @@
-import 'package:noteyio_flutter/views/basemodel.dart';
+import 'package:noteyio/views/basemodel.dart';
 
 class IntroViewModel extends BaseModel{
 

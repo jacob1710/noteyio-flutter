@@ -1,4 +1,4 @@
-# noteyio_flutter
+# noteyio
 
 NoteyIO Flutter
 

@@ -1,5 +1,5 @@
-import 'package:noteyio_flutter/models/User.dart';
-import 'package:noteyio_flutter/views/basemodel.dart';
+import 'package:noteyio/models/User.dart';
+import 'package:noteyio/views/basemodel.dart';
 
 class RegistrationViewModel extends BaseModel{
 
@@ -13,6 +13,15 @@ class RegistrationViewModel extends BaseModel{
 
   Future<User?> registerPressed() async{
     print('RegistrationViewModel.registerPressed');
+
+
+    final status = await authService.signUpWithEmail(
+      email: currentEmail,
+      pass: currentPwd,
+    );
+    print(status);
+
+
     User? optionalUser = await apiService.registerUser();
     return optionalUser;
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:noteyio_flutter/constants/app_styles.dart';
-import 'package:noteyio_flutter/models/User.dart';
-import 'package:noteyio_flutter/views/authentication/registration/registration_view_model.dart';
-import 'package:noteyio_flutter/widgets/default_button.dart';
+import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/models/User.dart';
+import 'package:noteyio/views/authentication/registration/registration_view_model.dart';
+import 'package:noteyio/widgets/default_button.dart';
 import 'package:stacked/stacked.dart';
 
 class RegistrationView extends StatefulWidget {

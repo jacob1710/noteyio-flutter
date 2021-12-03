@@ -1,8 +1,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:noteyio_flutter/constants/app_styles.dart';
-import 'package:noteyio_flutter/widgets/default_button.dart';
+import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/widgets/default_button.dart';
 import 'package:stacked/stacked.dart';
 
 import 'intro_view_model.dart';

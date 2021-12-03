@@ -1,4 +1,4 @@
-import 'package:noteyio_flutter/models/User.dart';
+import 'package:noteyio/models/User.dart';
 
 class UserService{
   late User _user;

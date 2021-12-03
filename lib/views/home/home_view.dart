@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:noteyio_flutter/constants/app_styles.dart';
-import 'package:noteyio_flutter/views/home/home_view_model.dart';
+import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/views/home/home_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {

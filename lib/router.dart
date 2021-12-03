@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:noteyio_flutter/constants/route_names.dart';
-import 'package:noteyio_flutter/views/authentication/login/login_view.dart';
-import 'package:noteyio_flutter/views/authentication/registration/registration_view.dart';
-import 'package:noteyio_flutter/views/home/home_view.dart';
-import 'package:noteyio_flutter/views/home/home_view_model.dart';
+import 'package:noteyio/constants/route_names.dart';
+import 'package:noteyio/views/authentication/login/login_view.dart';
+import 'package:noteyio/views/authentication/registration/registration_view.dart';
+import 'package:noteyio/views/home/home_view.dart';
+import 'package:noteyio/views/home/home_view_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("Router Accessed.");

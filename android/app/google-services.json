@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "462724652078",
+    "project_id": "noteyio-cecaf",
+    "storage_bucket": "noteyio-cecaf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462724652078:android:df1b1e8bf3ae64f5d793bf",
+        "android_client_info": {
+          "package_name": "com.example.noteyio_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462724652078-fmd2nsk6qlsr57cns234qruqvb2f8m1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMBMuphZia-HmDyXaY4iHcASwekF-o9CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462724652078-fmd2nsk6qlsr57cns234qruqvb2f8m1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462724652078:android:86c8b42a05f696b8d793bf",
+        "android_client_info": {
+          "package_name": "com.scase.noteyio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462724652078-fmd2nsk6qlsr57cns234qruqvb2f8m1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMBMuphZia-HmDyXaY4iHcASwekF-o9CM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462724652078-fmd2nsk6qlsr57cns234qruqvb2f8m1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

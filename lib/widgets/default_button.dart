@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noteyio_flutter/constants/app_styles.dart';
+import 'package:noteyio/constants/app_styles.dart';
 
 class DefaultButton extends StatelessWidget {
   final String text;
