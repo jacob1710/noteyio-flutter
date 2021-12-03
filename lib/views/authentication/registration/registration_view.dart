@@ -78,8 +78,14 @@ class _RegistrationViewState extends State<RegistrationView> {
                       Center(
                         child: DefaultButton(
                           onTapped: () async{
-                            User? user = await model.registerPressed();
-                          },
+                            NoteyioUser? optionalUser = await model.registerPressed();
+                            if(optionalUser != null){
+                              model.userService.setUser(user:optionalUser);
+                              model.navigateToHome();
+                            }else{
+                              print("INVALID REGISTRATION");
+                            }
+    },
                           text: 'Register',
                         ),
                       ),

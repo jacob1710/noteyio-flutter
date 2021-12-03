@@ -64,11 +64,13 @@ class _LoginViewState extends State<LoginView> {
                           Center(
                             child: DefaultButton(
                               onTapped: () async {
-                                User? optionalUser = await model.loginPressed();
+                                NoteyioUser? optionalUser = await model.loginPressed();
                                 if(optionalUser!=null) {
+                                  print("found user from api");
                                   model.userService.setUser(user:optionalUser);
                                   model.navigateToHome();
                                 }else{
+                                  print("null user from api");
                                   //Error - display error
                                 }
                               },

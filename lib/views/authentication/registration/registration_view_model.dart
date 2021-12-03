@@ -11,7 +11,7 @@ class RegistrationViewModel extends BaseModel{
     print('RegistrationViewModel.init');
   }
 
-  Future<User?> registerPressed() async{
+  Future<NoteyioUser?> registerPressed() async{
     print('RegistrationViewModel.registerPressed');
 
 
@@ -19,10 +19,16 @@ class RegistrationViewModel extends BaseModel{
       email: currentEmail,
       pass: currentPwd,
     );
-    print(status);
+    NoteyioUser? optionalUser;
+    if(status == "successful"){
+      print("successful");
+      print(authService.getUser());
+      optionalUser = await apiService.registerUser();
+    }else{
+      //Error
+      print(status);
+    }
 
-
-    User? optionalUser = await apiService.registerUser();
     return optionalUser;
   }
 
