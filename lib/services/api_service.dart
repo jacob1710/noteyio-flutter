@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:noteyio/models/User.dart';
+import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/services/auth_service.dart';
 
 import '../locator.dart';
@@ -15,7 +16,7 @@ class ApiService{
 
 
   static const String _endpoint =
-    'http://10.0.2.2:3000/api/'; // 'localhost' for android emulator;
+    'http://10.0.2.2:3000/api'; // 'localhost' for android emulator;
   var _client = new http.Client();
 
 
@@ -114,4 +115,34 @@ class ApiService{
   }
 
 //----Note Methods----
+
+  Future<UserNoteList?> getNotesForUser(String userId) async{
+    print('ApiService.getNotesForUser');
+    try {
+      var endpoint = Uri.parse('$_endpoint/notes/getAllForUser?userId=$userId');
+      print(endpoint);
+      var response =
+      await _client.get(endpoint, headers: _headers).timeout(_smallTimeout);
+      if (response.statusCode == 200) {
+        try {
+          print(response.body);
+          var body = json.decode(response.body);
+          print(body);
+          var notes = UserNoteList.fromJson(body);
+          print('found notes: $notes');
+          return notes;
+        } catch (e) {
+          print(e.toString());
+        }
+      } else {
+        print('No notes Found');
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print("error");
+      return null;
+    }
+  }
+
 }

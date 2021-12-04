@@ -13,7 +13,7 @@ class Note{
 
   Note.fromJson(Map<String, dynamic> json){
     userId = json['_id'];
-    text = json['userName'];
+    text = json['text'];
     title = json['title'];
     if(json['imgId'] != null){
       imgId = json['imgId'];

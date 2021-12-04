@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/route_names.dart';
 import 'package:noteyio/models/User.dart';
+import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/services/api_service.dart';
 import 'package:noteyio/services/auth_service.dart';
 import 'package:noteyio/services/navigation_service.dart';
+import 'package:noteyio/services/note_service.dart';
 import 'package:noteyio/services/user_service.dart';
 
 import '../locator.dart';
@@ -14,6 +16,9 @@ class BaseModel extends ChangeNotifier {
   final ApiService apiService = locator<ApiService>();
   final UserService userService = locator<UserService>();
   final AuthService authService = locator<AuthService>();
+  final NoteService noteService = locator<NoteService>();
+
+  UserNoteList? userNoteList;
 
   Future<bool> isUserLoggedIn() async {
     return authService.isUserLoggedIn();

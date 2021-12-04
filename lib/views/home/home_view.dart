@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/views/home/home_view_model.dart';
+import 'package:noteyio/views/notes/notes_view.dart';
 import 'package:noteyio/widgets/default_button.dart';
+import 'package:noteyio/widgets/loading_widget.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
+
+
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -36,17 +41,33 @@ class _HomeViewState extends State<HomeView> {
               )
             ],
           ),
-          body: Center(
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child:
-                Text(
-                  model.userService.getUser().email
-                ),
-              ),
+          body: SingleChildScrollView(
+            child: FutureBuilder(
+                future: model.noteService.getNotesForUser(userId: model.userService.getUser().id, apiService: model.apiService),
+                builder: (
+                    BuildContext context,
+                    AsyncSnapshot<UserNoteList?> snapshot,
+                    ){
+                  if(snapshot.hasData){
+                    model.userNoteList = snapshot.data!;
+                    if(model.userNoteList != null){
+
+                      // If there was a problem retrieving orders ... (returned null)
+                      if (model.userNoteList!.notes.length == 0){
+                        return Text("Problem retrieving notes, please try again.");
+                      } else {
+                        return NotesView(userNotes: model.userNoteList!);
+                      }
+
+                    } else {
+                      return Center(child: Text("You have no previous orders!"));
+                    }
+                  }else{
+                    return LoadingWidget();
+                  }
+                }
             ),
-          ),
+          )
         ));
   }
 }

@@ -11,11 +11,11 @@ class UserNoteList{
 
   UserNoteList.fromJson(Map<String, dynamic> json){
     List<dynamic> notesListJSON = (json['notes'] as List<dynamic>);
-
+    print(notesListJSON);
     notes = <Note>[];
 
     notesListJSON.forEach((element) {
-
+      print('element= $element');
       Map<String, dynamic> noteJsonMapping = (element as Map<String, dynamic>);
       notes.add(Note.fromJson(noteJsonMapping));
 

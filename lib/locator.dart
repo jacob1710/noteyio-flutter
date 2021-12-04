@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:noteyio/services/api_service.dart';
 import 'package:noteyio/services/auth_service.dart';
 import 'package:noteyio/services/navigation_service.dart';
+import 'package:noteyio/services/note_service.dart';
 import 'package:noteyio/services/user_service.dart';
 import 'package:noteyio/views/basemodel.dart';
 
@@ -16,6 +17,8 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton(() => ApiService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => AuthService());
+  locator.registerLazySingleton(() => NoteService());
+
 
 
 
