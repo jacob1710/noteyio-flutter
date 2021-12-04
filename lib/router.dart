@@ -6,7 +6,8 @@ import 'package:noteyio/views/authentication/login/login_view.dart';
 import 'package:noteyio/views/authentication/registration/registration_view.dart';
 import 'package:noteyio/views/home/home_view.dart';
 import 'package:noteyio/views/home/home_view_model.dart';
-import 'package:noteyio/views/notes/individual_note_view.dart';
+import 'package:noteyio/views/note_creation/create_note_view.dart';
+import 'package:noteyio/views/note_viewing/individual_note_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("Router Accessed.");
@@ -33,6 +34,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         routeName: settings.name,
         viewToShow: IntroView(),
       );
+
+    case AppRouteNames.kCreateNoteViewRoute:
+      VoidCallback refresh = settings.arguments as VoidCallback;
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: CreateNoteView(refresh: refresh),
+      );
+
     case AppRouteNames.kIndividualNoteViewRoute:
       Note note = settings.arguments as Note;
       return _getPageRoute(

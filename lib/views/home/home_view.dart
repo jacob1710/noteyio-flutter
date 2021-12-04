@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noteyio/constants/app_styles.dart';
 import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/views/home/home_view_model.dart';
-import 'package:noteyio/views/notes/notes_view.dart';
+import 'package:noteyio/views/note_viewing/notes_view.dart';
 import 'package:noteyio/widgets/default_button.dart';
 import 'package:noteyio/widgets/loading_widget.dart';
 import 'package:stacked/stacked.dart';
@@ -29,6 +29,17 @@ class _HomeViewState extends State<HomeView> {
         onModelReady: (model) => model.init(),
         builder: (context, model, child) => Scaffold(
             backgroundColor: AppStyles.kDefaultDarkColor,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                // Add your onPressed code here!
+                print('pressed action button');
+                model.navigateToCreateNoteView(() {
+                  _refreshData(model);
+                });
+              },
+              child: const Icon(Icons.add),
+              backgroundColor: AppStyles.kSecondaryColor,
+            ),
             appBar: AppBar(
               title: Text(
                 "NoteyIO",

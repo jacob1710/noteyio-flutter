@@ -43,7 +43,6 @@ class _LoginViewState extends State<LoginView> {
                             enableSuggestions: true,
                             autocorrect: false,
                             onChanged: (value) {
-                              print(value);
                               model.currentEmail = value;
                             },
                           ),
@@ -57,7 +56,6 @@ class _LoginViewState extends State<LoginView> {
                             enableSuggestions: false,
                             autocorrect: false,
                             onChanged: (value) {
-                              print(value);
                               model.currentPwd = value;
                             },
                           ),

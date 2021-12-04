@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:noteyio/constants/app_styles.dart';
 import 'package:noteyio/models/UserNoteList.dart';
-import 'package:noteyio/views/notes/notes_view_model.dart';
+import 'package:noteyio/views/note_viewing/notes_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class NotesView extends StatefulWidget {
@@ -65,7 +65,7 @@ class _NotesViewState extends State<NotesView> {
                 //   child: Card(
                 //     child: Padding(
                 //       padding: const EdgeInsets.all(8.0),
-                //       child: Text(widget.userNotes.notes[index].title),
+                //       child: Text(widget.userNotes.note_viewing[index].title),
                 //     ),
                 //   ),
                 // );

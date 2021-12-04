@@ -47,4 +47,7 @@ class BaseModel extends ChangeNotifier {
   navigateToIndividualNoteView(Note note){
     _navigationService.navigateTo(AppRouteNames.kIndividualNoteViewRoute,arguments: note);
   }
+  navigateToCreateNoteView(VoidCallback refresh){
+    _navigationService.navigateTo(AppRouteNames.kCreateNoteViewRoute, arguments: refresh);
+  }
 }

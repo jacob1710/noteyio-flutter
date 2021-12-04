@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:noteyio/models/NewNoteDto.dart';
+import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/models/User.dart';
 import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/services/auth_service.dart';
@@ -147,7 +149,7 @@ class ApiService{
 
 
   Future<bool?> deleteNoteWithId(String noteId) async{
-    print('ApiService.getNotesForUser');
+    print('ApiService.deleteNoteWithId');
     try {
       var endpoint = Uri.parse('$_endpoint/notes/delete?noteId=$noteId');
       print(endpoint);
@@ -164,6 +166,35 @@ class ApiService{
           }else{
             return false;
           }
+        } catch (e) {
+          print(e.toString());
+        }
+      } else {
+        print('No note Found');
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print("error");
+      return null;
+    }
+  }
+
+  Future<bool?> createNewNote (NewNoteDto newNoteDto) async{
+    print('ApiService.createNewNote');
+    try {
+      var endpoint = Uri.parse('$_endpoint/notes/create');
+      print(endpoint);
+      var response =
+      await _client.post(endpoint, headers: _headers,body: JsonEncoder().convert(newNoteDto)).timeout(_smallTimeout);
+      if (response.statusCode == 200) {
+        try {
+          print(response.body);
+          var body = json.decode(response.body);
+          print(body);
+          var note = Note.fromJson(body['note']);
+          print('found note: $note');
+          return true;
         } catch (e) {
           print(e.toString());
         }
