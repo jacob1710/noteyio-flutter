@@ -8,8 +8,6 @@ import 'package:noteyio/widgets/loading_widget.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatefulWidget {
-
-
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -17,57 +15,83 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  ScrollController _controller = new ScrollController();
+
+  Future<void> _refreshData(HomeViewModel homeViewModel) async {
+    await Future.delayed(Duration(seconds: 3));
+    homeViewModel.userNoteList = null;
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) => model.init(),
         builder: (context, model, child) => Scaffold(
-          backgroundColor: AppStyles.kDefaultDarkColor,
-          appBar: AppBar(
-            title: Text("NoteyIO",style: TextStyle(color: Colors.white),),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DefaultButton(
-                    onTapped: (){
+            backgroundColor: AppStyles.kDefaultDarkColor,
+            appBar: AppBar(
+              title: Text(
+                "NoteyIO",
+                style: TextStyle(color: Colors.white),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DefaultButton(
+                    onTapped: () {
                       print("logout pressed");
                       model.logoutUser();
-                      },
+                    },
                     text: "Logout",
-                  buttonColor: AppStyles.kSecondaryColor,
-                  textColor: Colors.white,
-                ),
-              )
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: FutureBuilder(
-                future: model.noteService.getNotesForUser(userId: model.userService.getUser().id, apiService: model.apiService),
-                builder: (
-                    BuildContext context,
-                    AsyncSnapshot<UserNoteList?> snapshot,
-                    ){
-                  if(snapshot.hasData){
-                    model.userNoteList = snapshot.data!;
-                    if(model.userNoteList != null){
-
-                      // If there was a problem retrieving orders ... (returned null)
-                      if (model.userNoteList!.notes.length == 0){
-                        return Text("Problem retrieving notes, please try again.");
-                      } else {
-                        return NotesView(userNotes: model.userNoteList!);
-                      }
-
-                    } else {
-                      return Center(child: Text("You have no previous orders!"));
-                    }
-                  }else{
-                    return LoadingWidget();
-                  }
-                }
+                    buttonColor: AppStyles.kSecondaryColor,
+                    textColor: Colors.white,
+                  ),
+                )
+              ],
             ),
-          )
-        ));
+            // onRefresh: (){
+            //   return _refreshData(model);
+            // },
+            body: RefreshIndicator(
+                onRefresh: () {
+                  return _refreshData(model);
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  controller: _controller,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FutureBuilder(
+                          future: model.noteService.getNotesForUser(
+                              userId: model.userService.getUser().id,
+                              apiService: model.apiService),
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<UserNoteList?> snapshot,
+                          ) {
+                            if (snapshot.hasData) {
+                              model.userNoteList = snapshot.data!;
+                              if (model.userNoteList != null) {
+                                // If there was a problem retrieving orders ... (returned null)
+                                if (model.userNoteList!.notes.length == 0) {
+                                  return Text(
+                                      "Problem retrieving notes, please try again.");
+                                } else {
+                                  return NotesView(userNotes: model.userNoteList!);
+                                }
+                              } else {
+                                return Center(
+                                    child: Text("You have no previous orders!"));
+                              }
+                            } else {
+                              return LoadingWidget();
+                            }
+                          }),
+                    ],
+                  ),
+                ))));
   }
 }

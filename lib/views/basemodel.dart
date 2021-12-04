@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/route_names.dart';
+import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/models/User.dart';
 import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/services/api_service.dart';
@@ -42,5 +43,8 @@ class BaseModel extends ChangeNotifier {
   }
   navigateToIntro(){
     _navigationService.navigateToWithNoBack(AppRouteNames.kIntroViewRoute);
+  }
+  navigateToIndividualNoteView(Note note){
+    _navigationService.navigateTo(AppRouteNames.kIndividualNoteViewRoute,arguments: note);
   }
 }

@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class Note{
 
   late String userId;
@@ -6,15 +8,17 @@ class Note{
   late String imgId;
   late List<String> tags;
   late String title;
+  late String noteId;
   Note({
-    required this.userId, required this.text, required this.tags, required this.title
+    required this.userId, required this.text, required this.tags, required this.title, required this.noteId
     });
 
 
   Note.fromJson(Map<String, dynamic> json){
-    userId = json['_id'];
+    userId = json['userId'];
     text = json['text'];
     title = json['title'];
+    noteId = json['_id'];
     if(json['imgId'] != null){
       imgId = json['imgId'];
     }
@@ -30,6 +34,6 @@ class Note{
   @override
   String toString() {
     // TODO: implement toString
-    return 'Note{userId: $userId, text: $text , imgId: $imgId , title: $title, tags: $tags}';
+    return 'Note{userId: $userId, text: $text , imgId: $imgId , title: $title, tags: $tags, noteId: $noteId}';
   }
 }

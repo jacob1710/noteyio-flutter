@@ -5,4 +5,5 @@ class AppRouteNames{
   static const String kRegistrationViewRoute = "RegistrationView";
   static const String kHomeViewRoute = "HomeView";
   static const String kIntroViewRoute = "IntroView";
+  static const String kIndividualNoteViewRoute = "IndividualNoteView";
 }
