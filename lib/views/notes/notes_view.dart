@@ -7,8 +7,9 @@ import 'package:stacked/stacked.dart';
 
 class NotesView extends StatefulWidget {
   final UserNoteList userNotes;
+  final VoidCallback callback;
 
-  const NotesView({Key? key, required this.userNotes}) : super(key: key);
+  const NotesView({Key? key, required this.userNotes, required this.callback}) : super(key: key);
 
   @override
   _NotesViewState createState() => _NotesViewState();
@@ -36,9 +37,11 @@ class _NotesViewState extends State<NotesView> {
                   dismissible: null,
                   children: [
                     SlidableAction(
-                      onPressed: (context){
+                      onPressed: (context) async {
                         print('delete pressed for ${widget.userNotes.notes[index].noteId}');
-                      },
+                        bool? success = await model.apiService.deleteNoteWithId(widget.userNotes.notes[index].noteId);
+                        widget.callback();
+                        },
                       backgroundColor: Color(0xFFFE4A49),
                       foregroundColor: Colors.white,
                       icon: Icons.delete,

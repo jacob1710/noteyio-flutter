@@ -18,9 +18,7 @@ class _HomeViewState extends State<HomeView> {
   ScrollController _controller = new ScrollController();
 
   Future<void> _refreshData(HomeViewModel homeViewModel) async {
-    await Future.delayed(Duration(seconds: 3));
     homeViewModel.userNoteList = null;
-
     setState(() {});
   }
 
@@ -77,10 +75,23 @@ class _HomeViewState extends State<HomeView> {
                               if (model.userNoteList != null) {
                                 // If there was a problem retrieving orders ... (returned null)
                                 if (model.userNoteList!.notes.length == 0) {
-                                  return Text(
-                                      "Problem retrieving notes, please try again.");
+                                  return Center(
+                                    child: Card(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Text(
+                                            "No Notes: Try adding one"
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 } else {
-                                  return NotesView(userNotes: model.userNoteList!);
+                                  return NotesView(
+                                      userNotes: model.userNoteList!,
+                                      callback:(){
+                                        _refreshData(model);
+                                      } ,
+                                  );
                                 }
                               } else {
                                 return Center(

@@ -145,4 +145,37 @@ class ApiService{
     }
   }
 
+
+  Future<bool?> deleteNoteWithId(String noteId) async{
+    print('ApiService.getNotesForUser');
+    try {
+      var endpoint = Uri.parse('$_endpoint/notes/delete?noteId=$noteId');
+      print(endpoint);
+      var response =
+      await _client.delete(endpoint, headers: _headers).timeout(_smallTimeout);
+      if (response.statusCode == 200) {
+        try {
+          print(response.body);
+          var body = json.decode(response.body);
+          print(body);
+          var status = body['status'];
+          if(status == 'Success'){
+            return true;
+          }else{
+            return false;
+          }
+        } catch (e) {
+          print(e.toString());
+        }
+      } else {
+        print('No note Found');
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print("error");
+      return null;
+    }
+  }
+
 }
