@@ -55,6 +55,7 @@ class ApiService{
 
   Future<NoteyioUser?> getUser(String firebaseId) async{
     print('ApiService.getUser');
+    await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/users/get?firebaseId=$firebaseId');
       var response =
@@ -83,7 +84,7 @@ class ApiService{
 
   Future<NoteyioUser?> registerUser(Map<String, String> newUserDto) async{
     print('ApiService.registerUser');
-    const String firebaseId = 'qsdgjnhsldjkgh234626';
+    await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/users/create');
       var response =
@@ -120,6 +121,7 @@ class ApiService{
 
   Future<UserNoteList?> getNotesForUser(String userId) async{
     print('ApiService.getNotesForUser');
+    await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/notes/getAllForUser?userId=$userId');
       print(endpoint);
@@ -150,6 +152,7 @@ class ApiService{
 
   Future<bool?> deleteNoteWithId(String noteId) async{
     print('ApiService.deleteNoteWithId');
+    await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/notes/delete?noteId=$noteId');
       print(endpoint);
@@ -182,6 +185,7 @@ class ApiService{
 
   Future<bool?> createNewNote (NewNoteDto newNoteDto) async{
     print('ApiService.createNewNote');
+    await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/notes/create');
       print(endpoint);

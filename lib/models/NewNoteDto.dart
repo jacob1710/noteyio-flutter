@@ -4,7 +4,7 @@ class NewNoteDto{
   String imgId;
   String title;
   var tags = <String>[];
-  NewNoteDto({required this.userId, required this.text, required this.imgId, required this.title});
+  NewNoteDto({required this.userId, required this.text, required this.imgId, required this.title, required this.tags});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> newNote = new Map<String, dynamic>();

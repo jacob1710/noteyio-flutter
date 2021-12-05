@@ -15,8 +15,12 @@ class CreateNoteView extends StatefulWidget {
 }
 
 class _CreateNoteViewState extends State<CreateNoteView> {
+
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    var _tagController = TextEditingController();
     return ViewModelBuilder<CreateNoteViewModel>.reactive(
         viewModelBuilder: () => CreateNoteViewModel(),
         onModelReady: (model) => model.init(),
@@ -58,13 +62,83 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                           labelText: 'Note Text:',
                         ),
                         enableSuggestions: true,
-                        autocorrect: false,
+                        autocorrect: true,
+                        minLines: 2,
+                        maxLines: 6,
                         onChanged: (value) {
                           model.text = value;
                         },
                       ),
                     )
                 ),
+                Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Tags",
+                            style: AppStyles.kHeadingTextStyle
+                          ),
+                          model.tags.isEmpty ? Center(child: Text('No Tags Set')):ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: model.tags.length,
+                              itemBuilder: (context, int index) {
+                                return Text('• '+model.tags[index]);
+                              }
+                          ),
+                        ],
+                      )
+                    )
+                ),
+
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: Card(
+                          child: Container(
+                            width: screenWidth*0.6,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: _tagController,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter Tag Name',
+                                  labelText: 'Add Tag:',
+                                ),
+                                enableSuggestions: true,
+                                autocorrect: false,
+                                onChanged: (value) {
+                                  model.currentTag = value;
+                                },
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                    DefaultButton(
+                      onTapped: () async {
+                        bool complete =  model.addTagToList(model.currentTag);
+                        print(complete);
+                        if(complete){
+                          _tagController.clear();
+                          model.currentTag = '';
+                          setState(() {
+                          });
+                        }else{
+                          //error
+
+                          //Dismiss keyboard
+                          FocusScope.of(context).requestFocus(new FocusNode());
+
+                        }
+                      },
+                      text: 'Add Tag',
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
                 Center(
                   child: DefaultButton(
                     onTapped: () async {
@@ -77,7 +151,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                         //error
                       }
                     },
-                    text: 'Create',
+                    text: 'Create Note',
                   ),
                 ),
               ]
