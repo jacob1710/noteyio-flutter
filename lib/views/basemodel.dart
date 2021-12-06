@@ -50,4 +50,7 @@ class BaseModel extends ChangeNotifier {
   navigateToCreateNoteView(VoidCallback refresh){
     _navigationService.navigateTo(AppRouteNames.kCreateNoteViewRoute, arguments: refresh);
   }
+  navigateToSearchView(String search){
+    _navigationService.navigateTo(AppRouteNames.kSearchViewRoute, arguments: search);
+  }
 }

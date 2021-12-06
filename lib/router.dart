@@ -8,6 +8,7 @@ import 'package:noteyio/views/home/home_view.dart';
 import 'package:noteyio/views/home/home_view_model.dart';
 import 'package:noteyio/views/note_creation/create_note_view.dart';
 import 'package:noteyio/views/note_viewing/individual_note_view.dart';
+import 'package:noteyio/views/search/note_search_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("Router Accessed.");
@@ -47,6 +48,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: IndividualNoteView(note: note),
+      );
+    case AppRouteNames.kSearchViewRoute:
+      String searchTerm = settings.arguments as String;
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: NoteSearchView(searchTerm: searchTerm),
       );
 
     default:

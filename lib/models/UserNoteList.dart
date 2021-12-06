@@ -15,7 +15,6 @@ class UserNoteList{
     notes = <Note>[];
 
     notesListJSON.forEach((element) {
-      print('element= $element');
       Map<String, dynamic> noteJsonMapping = (element as Map<String, dynamic>);
       notes.add(Note.fromJson(noteJsonMapping));
 

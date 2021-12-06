@@ -24,6 +24,12 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+
+    //Search bar taken from
+    //https://blog.logrocket.com/how-to-create-search-bar-flutter/
+
+
+
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) => model.init(),
@@ -31,8 +37,6 @@ class _HomeViewState extends State<HomeView> {
             backgroundColor: AppStyles.kDefaultDarkColor,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                // Add your onPressed code here!
-                print('pressed action button');
                 model.navigateToCreateNoteView(() {
                   _refreshData(model);
                 });
@@ -41,11 +45,61 @@ class _HomeViewState extends State<HomeView> {
               backgroundColor: AppStyles.kSecondaryColor,
             ),
             appBar: AppBar(
-              title: Text(
-                "NoteyIO",
-                style: TextStyle(color: Colors.white),
-              ),
+              title: model.customSearchBar,
               actions: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (model.customIcon.icon == Icons.search) {
+                        print('changing');
+                        print(model.customSearchBar.toString());
+                        model.customIcon = Icon(Icons.cancel);
+                        model.customSearchBar = ListTile(
+                          // leading: Icon(
+                          //   Icons.search,
+                          //   color: Colors.white,
+                          //   size: 28,
+                          // ),
+                          title: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search through notes...',
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                            onSubmitted: (value){
+                              //Change back to original view
+                              model.navigateToSearchView(value);
+                              model.customIcon = Icon(Icons.search);
+                              model.customSearchBar = Text(
+                                "NoteyIO",
+                                style: TextStyle(color: Colors.white),
+                              );
+                              model.searchTerm = '';
+                              setState(() {
+
+                              });
+                            },
+                          ),
+                        );
+                      } else {
+                        model.customIcon = Icon(Icons.search);
+                        model.customSearchBar = Text(
+                          "NoteyIO",
+                          style: TextStyle(color: Colors.white),
+                        );
+                        model.searchTerm = '';
+                      }
+                    });
+                  },
+                  icon: model.customIcon,
+                  color: Colors.white,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: DefaultButton(

@@ -129,18 +129,14 @@ class ApiService{
       await _client.get(endpoint, headers: _headers).timeout(_smallTimeout);
       if (response.statusCode == 200) {
         try {
-          print(response.body);
           var body = json.decode(response.body);
-          print(body);
           var notes = UserNoteList.fromJson(body);
-          print('found notes: $notes');
           return notes;
         } catch (e) {
           print(e.toString());
         }
       } else {
         print('No notes Found');
-        print(response.body);
         return null;
       }
     } catch (e) {
@@ -160,9 +156,7 @@ class ApiService{
       await _client.delete(endpoint, headers: _headers).timeout(_smallTimeout);
       if (response.statusCode == 200) {
         try {
-          print(response.body);
           var body = json.decode(response.body);
-          print(body);
           var status = body['status'];
           if(status == 'Success'){
             return true;
@@ -174,7 +168,6 @@ class ApiService{
         }
       } else {
         print('No note Found');
-        print(response.body);
         return null;
       }
     } catch (e) {
@@ -193,11 +186,8 @@ class ApiService{
       await _client.post(endpoint, headers: _headers,body: JsonEncoder().convert(newNoteDto)).timeout(_smallTimeout);
       if (response.statusCode == 200) {
         try {
-          print(response.body);
           var body = json.decode(response.body);
-          print(body);
           var note = Note.fromJson(body['note']);
-          print('found note: $note');
           return true;
         } catch (e) {
           print(e.toString());
