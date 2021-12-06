@@ -160,7 +160,7 @@ class _HomeViewState extends State<HomeView> {
                                 }
                               } else {
                                 return Center(
-                                    child: Text("You have no previous orders!"));
+                                    child: Text("No Notes: Try adding one"));
                               }
                             } else {
                               return LoadingWidget();
@@ -168,6 +168,9 @@ class _HomeViewState extends State<HomeView> {
                           }),
                     ],
                   ),
-                ))));
+                )
+            )
+        )
+    );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/models/UserNoteList.dart';
+import 'package:noteyio/views/note_viewing/notes_view.dart';
 import 'package:noteyio/views/search/note_search_view_model.dart';
+import 'package:noteyio/widgets/loading_widget.dart';
 import 'package:stacked/stacked.dart';
 
 class NoteSearchView extends StatefulWidget {
@@ -13,6 +16,7 @@ class NoteSearchView extends StatefulWidget {
 }
 
 class _NoteSearchViewState extends State<NoteSearchView> {
+  ScrollController _controller = new ScrollController();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<NoteSearchViewModel>.reactive(
@@ -41,7 +45,58 @@ class _NoteSearchViewState extends State<NoteSearchView> {
               // )
             ],
           ),
-              body: Center(child: Text(widget.searchTerm)),
+              body: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                controller: _controller,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    FutureBuilder(
+                        future: model.noteService.searchForNotes(
+                            query: widget.searchTerm,
+                            userId: model.userService.getUser().id,
+                            apiService: model.apiService),
+                        builder: (
+                            BuildContext context,
+                            AsyncSnapshot<UserNoteList?> snapshot,
+                            ) {
+                          if (snapshot.hasData) {
+                            model.userNoteList = snapshot.data!;
+                            if (model.userNoteList != null) {
+                              // If there was a problem retrieving orders ... (returned null)
+                              if (model.userNoteList!.notes.length == 0) {
+                                return Center(
+                                  child: Card(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Text(
+                                          "No Notes: Try adding one"
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return NotesView(
+                                  userNotes: model.userNoteList!,
+                                  callback:(){
+                                    setState(() {
+
+                                    });
+                                  } ,
+                                );
+                              }
+                            } else {
+                              return Center(
+                                  child: Text("No Notes: Try adding one"));
+                            }
+                          } else {
+                            return LoadingWidget();
+                          }
+                        }),
+                  ],
+                ),
+              ),
+              // body: Center(child: Text(widget.searchTerm)),
             )
     );
   }

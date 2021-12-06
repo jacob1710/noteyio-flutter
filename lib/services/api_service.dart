@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:noteyio/models/NewNoteDto.dart';
 import 'package:noteyio/models/Note.dart';
+import 'package:noteyio/models/SearchQueryDto.dart';
 import 'package:noteyio/models/User.dart';
 import 'package:noteyio/models/UserNoteList.dart';
 import 'package:noteyio/services/auth_service.dart';
@@ -189,6 +190,34 @@ class ApiService{
           var body = json.decode(response.body);
           var note = Note.fromJson(body['note']);
           return true;
+        } catch (e) {
+          print(e.toString());
+        }
+      } else {
+        print('No note Found');
+        print(response.body);
+        return null;
+      }
+    } catch (e) {
+      print("error");
+      return null;
+    }
+  }
+
+  Future<UserNoteList?> searchForNote (SearchQueryDto searchQueryDto) async{
+    print('ApiService.searchForNote');
+    print('search query is: ${searchQueryDto.searchQuery}');
+    await populateHeaders();
+    try {
+      var endpoint = Uri.parse('$_endpoint/notes/search');
+      print(endpoint);
+      var response =
+      await _client.post(endpoint, headers: _headers,body: JsonEncoder().convert(searchQueryDto)).timeout(_smallTimeout);
+      if (response.statusCode == 200) {
+        try {
+          var body = json.decode(response.body);
+          var notes = UserNoteList.fromJson(body);
+          return notes;
         } catch (e) {
           print(e.toString());
         }
