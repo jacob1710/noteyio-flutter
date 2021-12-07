@@ -4,12 +4,10 @@ NoteyIO Flutter
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+To run the project:
+ - Make sure the api is running otherwise the app will not function as wanted.
+ - Build the app, be it in Android Studio(Recommended) or using the command line to build using XCode if installing in an iOS device (This can only be built on an Apple Device).
+ - If the app does not connect to the api but
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
