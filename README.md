@@ -1,6 +1,4 @@
-# noteyio
-
-NoteyIO Flutter
+# NoteyIO
 
 ## Getting Started
 
