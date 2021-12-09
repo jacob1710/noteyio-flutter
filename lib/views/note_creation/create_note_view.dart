@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/constants/image_settings.dart';
 import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/views/note_creation/create_note_view_model.dart';
 import 'package:noteyio/widgets/default_button.dart';
@@ -148,9 +149,20 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                       // Pick an image
                       final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
                       if (image != null) {
-                        setState(() {
-                          model.imageFile = File(image.path);
-                        });
+                        File file = File(image.path);
+                        int bytes = file.readAsBytesSync().lengthInBytes;
+                        double mb = bytes / (1024*1024);
+                        if(mb<ImageSettings.maxImageSize){
+                          //Check image within size constraints
+                          setState(() {
+                            model.imageFile = file;
+                          });
+                        }else{
+                          //Image too large
+                          model.showErrorDialog(context,
+                              "Image Error",
+                              "Error, the image you have chosen is too large, keep it under ${ImageSettings.maxImageSize} MB");
+                        }
                       }
                     },
                     text: "Image picker"
@@ -170,6 +182,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                             Navigator.pop(context);
                           }else{
                             //Show error
+                            model.showErrorDialog(context, "Error", "Error adding note, please try again");
                           }
                         }
                       }
@@ -179,6 +192,7 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                         Navigator.pop(context);
                       }else{
                         //error
+                        model.showErrorDialog(context, "Error", "Error adding note, please try again");
                       }
                     },
                     text: 'Create Note',

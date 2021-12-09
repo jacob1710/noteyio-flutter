@@ -70,7 +70,7 @@ class _NoteSearchViewState extends State<NoteSearchView> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(20.0),
                                       child: Text(
-                                          "No Notes: Try adding one"
+                                          "No Notes from search: Try adding one"
                                       ),
                                     ),
                                   ),
@@ -87,7 +87,8 @@ class _NoteSearchViewState extends State<NoteSearchView> {
                               }
                             } else {
                               return Center(
-                                  child: Text("No Notes: Try adding one"));
+                                  child: Text("No Notes from search: Try adding one")
+                              );
                             }
                           } else {
                             return LoadingWidget();

@@ -70,6 +70,7 @@ class _LoginViewState extends State<LoginView> {
                                 }else{
                                   print("null user from api");
                                   //Error - display error
+                                  model.showErrorDialog(context, "Error", "Error logging in, please try again");
                                 }
                               },
                               text: 'Login',
