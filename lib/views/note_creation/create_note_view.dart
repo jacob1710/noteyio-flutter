@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:noteyio/constants/app_styles.dart';
+import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/views/note_creation/create_note_view_model.dart';
 import 'package:noteyio/widgets/default_button.dart';
 import 'package:stacked/stacked.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateNoteView extends StatefulWidget {
 
@@ -138,13 +142,39 @@ class _CreateNoteViewState extends State<CreateNoteView> {
                     ),
                   ],
                 ),
+                DefaultButton(
+                    onTapped: () async {
+                      final ImagePicker _picker = ImagePicker();
+                      // Pick an image
+                      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                      if (image != null) {
+                        setState(() {
+                          model.imageFile = File(image.path);
+                        });
+                      }
+                    },
+                    text: "Image picker"
+                ),
                 SizedBox(height: 20),
                 Center(
                   child: DefaultButton(
                     onTapped: () async {
-                      bool? complete = await model.createPressed();
-                      print(complete);
-                      if(complete){
+                      Note? finalNote = await model.createPressed();
+                      if(model.imageFile!=null){
+                        if(finalNote!=null){
+                          //If note has uploaded successfully
+                          bool? hasWorked = await model.uploadImageToNote(finalNote.noteId);
+                          if(hasWorked!=null){
+                            //If image has uploaded successfully
+                            widget.refresh();
+                            Navigator.pop(context);
+                          }else{
+                            //Show error
+                          }
+                        }
+                      }
+                      if(finalNote!=null){
+                        model.imageFile = null;
                         widget.refresh();
                         Navigator.pop(context);
                       }else{

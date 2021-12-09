@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_uploader/flutter_uploader.dart';
 import 'package:noteyio/constants/route_names.dart';
 import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/models/User.dart';
@@ -28,6 +29,22 @@ class BaseModel extends ChangeNotifier {
   void logoutUser() {
     authService.logout();
     navigateToIntro();
+  }
+
+  void backgroundHandler() {
+    // Needed so that plugin communication works.
+    WidgetsFlutterBinding.ensureInitialized();
+
+    // This uploader instance works within the isolate only.
+    FlutterUploader uploader = FlutterUploader();
+
+    // You have now access to:
+    uploader.progress.listen((progress) {
+      // upload progress
+    });
+    uploader.result.listen((result) {
+      // upload results
+    });
   }
 
 

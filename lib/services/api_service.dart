@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_uploader/flutter_uploader.dart';
 import 'package:noteyio/models/NewNoteDto.dart';
 import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/models/SearchQueryDto.dart';
@@ -16,6 +17,8 @@ class ApiService{
 
   final AuthService? _authService =
   locator<AuthService>();
+
+  final uploader = FlutterUploader();
 
 
   static const String _endpoint =
@@ -177,7 +180,7 @@ class ApiService{
     }
   }
 
-  Future<bool?> createNewNote (NewNoteDto newNoteDto) async{
+  Future<Note?> createNewNote (NewNoteDto newNoteDto) async{
     print('ApiService.createNewNote');
     await populateHeaders();
     try {
@@ -189,7 +192,7 @@ class ApiService{
         try {
           var body = json.decode(response.body);
           var note = Note.fromJson(body['note']);
-          return true;
+          return note;
         } catch (e) {
           print(e.toString());
         }
@@ -203,6 +206,42 @@ class ApiService{
       return null;
     }
   }
+
+  Future<bool?> uploadImageToNote(File image, String noteId) async {
+    print('ApiService.uploadImageToNote');
+    var endpoint = Uri.parse('$_endpoint/notes/addPhotoToNote');
+    print(endpoint);
+    try{
+      var request = http.MultipartRequest('POST',endpoint);
+      request.files.add(
+          http.MultipartFile.fromBytes(
+              'photo',
+              image.readAsBytesSync(),
+              filename: noteId
+          )
+      );
+      request.fields['name'] = noteId;
+      request.fields['noteId'] = noteId;
+      var resAsStream = await request.send();
+      var response = await http.Response.fromStream(resAsStream);
+      if(response.statusCode == 200){
+        try {
+          var body = json.decode(response.body);
+          var note = Note.fromJson(body['note']);
+          return true;
+        } catch (e) {
+          print(e.toString());
+        }
+      }else{
+        return null;
+      }
+    }catch(e){
+      print('error');
+      return null;
+    }
+
+  }
+
 
   Future<UserNoteList?> searchForNote (SearchQueryDto searchQueryDto) async{
     print('ApiService.searchForNote');

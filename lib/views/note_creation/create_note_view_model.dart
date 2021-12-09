@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:noteyio/models/NewNoteDto.dart';
+import 'package:noteyio/models/Note.dart';
 import 'package:noteyio/views/basemodel.dart';
 
 class CreateNoteViewModel extends BaseModel{
@@ -8,23 +12,27 @@ class CreateNoteViewModel extends BaseModel{
   String title = '';
   String currentTag = '';
 
+  String noteId = '';
+  File? imageFile;
+
   Future<void> init() async{
     print('CreateNoteViewModel.init');
   }
 
-  Future<bool> createPressed() async{
+  Future<bool?> uploadImageToNote(String noteId) async{
+    bool? value = await apiService.uploadImageToNote(imageFile!,noteId);
+    return value;
+  }
+
+  Future<Note?> createPressed() async{
     print('CreateNoteViewModel.createPressed');
     print(text+'--'+title+'--'+userService.getUser().id);
     NewNoteDto newNoteDto = new NewNoteDto(
         userId: userService.getUser().id, text: text,
         imgId: '', title: title, tags: tags
     );
-    bool? result = await apiService.createNewNote(newNoteDto);
-    if(result == null){
-      return false;
-    }else{
-      return result;
-    }
+    Note? resultNote = await apiService.createNewNote(newNoteDto);
+    return resultNote;
   }
   bool addTagToList(String tagName){
     if(tags.contains(tagName)){
