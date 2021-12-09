@@ -11,7 +11,6 @@ class UserNoteList{
 
   UserNoteList.fromJson(Map<String, dynamic> json){
     List<dynamic> notesListJSON = (json['notes'] as List<dynamic>);
-    print(notesListJSON);
     notes = <Note>[];
 
     notesListJSON.forEach((element) {

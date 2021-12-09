@@ -43,35 +43,54 @@ class _IndividualNoteViewState extends State<IndividualNoteView> {
                   // )
                 ],
               ),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Text(widget.note.text),
-                        )
+              body: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if(widget.note.imgId!='')
+                    Card(
+                      child: Image.network(
+                          model.imageApiEndpoint+widget.note.imgId,
+                          headers: model.headers,
+                      ),
                     ),
-                  ),
-                  Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(widget.note.imgId),
-                      )
-                  ),
-                  Card(
-                    child: Column(
-                      children: [
-                        for ( var i in (widget.note.tags)) Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Text(i.toString()),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                    Card(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                "Text:",
+                              style: AppStyles.kHeadingTextStyle,
+                            ),
+                          ),
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(widget.note.text),
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Tags:",
+                            style: AppStyles.kHeadingTextStyle,
+                          ),
+                          Column(
+                            children: [
+                              for ( var i in (widget.note.tags)) Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                    "• "+i.toString()
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ));
   }
