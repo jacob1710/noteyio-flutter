@@ -26,7 +26,7 @@ class _NoteSearchViewState extends State<NoteSearchView> {
           backgroundColor: AppStyles.kDefaultDarkColor,
           appBar: AppBar(
             title: Text(
-              "Search",
+              "Search: "+widget.searchTerm,
               style: TextStyle(color: Colors.white),
               overflow: TextOverflow.ellipsis,
             ),

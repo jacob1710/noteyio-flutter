@@ -259,15 +259,16 @@ class ApiService{
           return notes;
         } catch (e) {
           print(e.toString());
+          return UserNoteList(notes: []);
         }
       } else {
         print('No note Found');
         print(response.body);
-        return null;
+        return UserNoteList(notes: []);
       }
     } catch (e) {
       print("error");
-      return null;
+      return UserNoteList(notes: []);
     }
   }
 
