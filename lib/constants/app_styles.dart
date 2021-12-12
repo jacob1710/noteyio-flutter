@@ -26,7 +26,7 @@ class AppStyles{
 
 
   static const Color kDefaultDarkColor = Color(0xFF27272B);
-  static const Color kPrimaryColor = Color(0xFFFFA000);
+  static const Color kPrimaryColor = Color(0xFFFFC107);
   static const Color kSecondaryColor = Colors.blue;
 
 
