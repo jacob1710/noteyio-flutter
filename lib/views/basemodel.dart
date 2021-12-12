@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_uploader/flutter_uploader.dart';
 import 'package:noteyio/constants/route_names.dart';
@@ -96,5 +98,28 @@ class BaseModel extends ChangeNotifier {
   }
   navigateToSearchView(String search){
     _navigationService.navigateTo(AppRouteNames.kSearchViewRoute, arguments: search);
+  }
+
+  //API FOR VIEWING IMAGE
+  //BAD CODE TO HAVE ENDPOINT HERE BUT NO OTHER WAY
+  String imageApiEndpoint = 'http://10.0.2.2:3000/api/photo/get/';
+
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'testing',
+    'device': 'unknown',
+    'version-code': '1.0.0',
+    'message-token': ''
+  };
+
+  Future<void> populateHeaders() async {
+    //add auth
+    headers['Authorization'] = await authService.getAuthToken();
+    // add platform
+    if (Platform.isAndroid) {
+      headers['device'] = 'android';
+    } else if (Platform.isIOS) {
+      headers['device'] = 'iOS';
+    }
   }
 }

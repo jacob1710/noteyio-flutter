@@ -18,6 +18,12 @@ class AppStyles{
     fontSize: 18,
     fontWeight: FontWeight.bold,
   );
+  static const TextStyle kBigTitleTextStyle = TextStyle(
+    color: kPrimaryColor,
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
+
 
   static const Color kDefaultDarkColor = Color(0xFF27272B);
   static const Color kPrimaryColor = Color(0xFFFFA000);

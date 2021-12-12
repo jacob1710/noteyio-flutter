@@ -30,6 +30,7 @@ class _NotesViewState extends State<NotesView> {
               physics:  NeverScrollableScrollPhysics(),
               itemCount: widget.userNotes.notes.length,
               itemBuilder: (context, int index){
+              model.populateHeaders();
               return Slidable(
                 //https://pub.dev/packages/flutter_slidable/example
                 endActionPane: ActionPane(
@@ -51,12 +52,20 @@ class _NotesViewState extends State<NotesView> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 2.0),
+
                   child: ListTile(
                     title: Text(widget.userNotes.notes[index].title),
                     tileColor: Colors.white,
                     onTap: () {
                       model.navigateToIndividualNoteView(widget.userNotes.notes[index]);
                     },
+                    trailing: widget.userNotes.notes[index].imgId != ''?
+                      Card(
+                        child: Image.network(
+                        model.imageApiEndpoint + widget.userNotes.notes[index].imgId,
+                          headers: model.headers,
+                        ),
+                      ): SizedBox.shrink(),
                   ),
                 ),
               );

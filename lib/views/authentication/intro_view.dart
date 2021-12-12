@@ -18,14 +18,14 @@ class IntroView extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // SizedBox(),
-              // // Hero(
-              // //   tag: 'logoAnimation',
-              // //   child: Image.asset(
-              // //     'assets/images/training_logo.png',
-              // //     fit: BoxFit.cover,
-              // //   ),
-              // // ),
+              Hero(
+                tag: 'logo',
+                child: Image.asset(
+                  'assets/images/noteyiologo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 150),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -38,7 +38,7 @@ class IntroView extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 50,),
+              SizedBox(height: 50),
               DefaultButton(
                 onTapped: () {
                   model.getStarted();

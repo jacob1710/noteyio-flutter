@@ -62,6 +62,7 @@ class ApiService{
     await populateHeaders();
     try {
       var endpoint = Uri.parse('$_endpoint/users/get?firebaseId=$firebaseId');
+      print(endpoint);
       var response =
       await _client.get(endpoint, headers: _headers).timeout(_smallTimeout);
       if (response.statusCode == 200) {
@@ -209,6 +210,7 @@ class ApiService{
 
   Future<bool?> uploadImageToNote(File image, String noteId) async {
     print('ApiService.uploadImageToNote');
+    await populateHeaders();
     var endpoint = Uri.parse('$_endpoint/notes/addPhotoToNote');
     print(endpoint);
     try{
@@ -222,6 +224,7 @@ class ApiService{
       );
       request.fields['name'] = noteId;
       request.fields['noteId'] = noteId;
+      request.headers['Authorization'] = await _authService!.getAuthToken();
       var resAsStream = await request.send();
       var response = await http.Response.fromStream(resAsStream);
       if(response.statusCode == 200){

@@ -22,8 +22,15 @@ class _LoginViewState extends State<LoginView> {
               backgroundColor: AppStyles.kDefaultDarkColor,
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      'assets/images/noteyiologo.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -64,11 +71,10 @@ class _LoginViewState extends State<LoginView> {
                               onTapped: () async {
                                 NoteyioUser? optionalUser = await model.loginPressed();
                                 if(optionalUser!=null) {
-                                  print("found user from api");
+                                  //Found user
                                   model.userService.setUser(user:optionalUser);
                                   model.navigateToHome();
                                 }else{
-                                  print("null user from api");
                                   //Error - display error
                                   model.showErrorDialog(context, "Error", "Error logging in, please try again");
                                 }

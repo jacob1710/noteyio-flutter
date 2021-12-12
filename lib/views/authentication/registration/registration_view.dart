@@ -22,8 +22,15 @@ class _RegistrationViewState extends State<RegistrationView> {
               backgroundColor: AppStyles.kDefaultDarkColor,
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Hero(
+                    tag: 'logo',
+                    child: Image.asset(
+                      'assets/images/noteyiologo.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
